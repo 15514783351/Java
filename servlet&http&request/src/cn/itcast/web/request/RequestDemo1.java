@@ -24,9 +24,10 @@ public class RequestDemo1 extends HttpServlet {
          * 3. 获取Servlet路径 /demo1 String getServletPath
          * 4. 获取get方式请求参数 name=zhangsan String getQueryString()
          * 5。 获取请求URL  String getRequestURI() StringBuffer getRequestURL
+         * URL:统一资源定位符  http://localhost/RequestDemo1
+         * URI：统一资源标识符 /RequestDemo1  范围更大
          * 6. 获取协议及版本 String getProtocol()
          * 7. 获取客户机的ip地址 String getRemoteAddr()
-         *
          */
 
         // 1. 获取请求方式 Get   String getMethod()
