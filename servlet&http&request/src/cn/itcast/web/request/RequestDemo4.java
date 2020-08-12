@@ -20,9 +20,13 @@ public class RequestDemo4 extends HttpServlet {
         System.out.println(referer);
         if (referer != null) {
             if (referer.contains("/day14")) {
-                System.out.println("播放电影");
+                response.setContentType("text/html;charset=utf-8");
+                response.getWriter().write("播放电影...");
+//                System.out.println("播放电影");
             } else {
-                System.out.println("盗版");
+                response.setContentType("text/html;charset=utf-8");
+                response.getWriter().write("盗版...");
+//                System.out.println("盗版");
             }
         }
     }
