@@ -13,6 +13,9 @@ public class RequestDemo8 extends HttpServlet {
         System.out.println("Demo8......");
 
         // 转发到demo9资源
+
+        // 存储数据到request域中
+        request.setAttribute("msg", "hello");
         request.getRequestDispatcher("/RequestDemo9").forward(request, response);
 
     }

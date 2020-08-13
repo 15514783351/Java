@@ -10,6 +10,9 @@ import java.io.IOException;
 @WebServlet("/RequestDemo9")
 public class RequestDemo9 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 获取数据
+        Object msg = request.getAttribute("msg");
+        System.out.println(msg);
         System.out.println("Demo9....");
     }
 
