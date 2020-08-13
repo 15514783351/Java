@@ -1,0 +1,126 @@
+开发步骤
+1. 创建项目，导入html也没面，配置文件，jar包
+2. 创建数据库环境
+    CREATE DATABASE day14；
+    USE day14;
+    CREATE TABLE USER(
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        username VARCHAR(32) UNIQUE NOT NULL,
+        password VARCHAR(32) NOT NULL
+    );
+
+3. 创建包cn.itcast.domain, 创建类User
+    package cn.itcast.domain;
+
+    /**
+     * 用户的实体类
+     */
+    public class User {
+        private int id;
+        private String username;
+        private String password;
+
+        @Override
+        public String toString() {
+            return "User{" +
+                    "id=" + id +
+                    ", username='" + username + '\'' +
+                    ", password='" + password + '\'' +
+                    '}';
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+    }
+
+4. 创建包cn.itcast.util, 创建类JDBCUtiles, 提供连接池
+    /**
+     * JDBC工具类 使用Durid连接池
+     */
+    public class JDBCUtils {
+        private static DataSource ds;
+        static {
+
+            try {
+                // 1. 加载配置文件
+                Properties pro = new Properties();
+                // 使用ClassLoader加载配置文件，获取字节输入流
+                InputStream is = JDBCUtils.class.getClassLoader().getResourceAsStream("druid.properties");
+                pro.load(is);
+
+                // 2. 初始化连接池对象
+                ds = DruidDataSourceFactory.createDataSource(pro);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        /**
+         * 获取连接池对象
+         */
+        public static DataSource getDataSource() {
+            return ds;
+        }
+
+        /**
+         * 获取链接Connection对象
+         */
+        public static Connection getConnection() throws SQLException {
+            return ds.getConnection();
+        }
+    }
+
+5. 创建包cn.itcast.dao, 创建类UserDao, 提供login的方法
+    /**
+     * 操作数据库中User表的类
+     */
+    public class UserDao {
+        // 声明JDBCTemplate对象共用
+        private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+        /**
+         *
+         * 登陆方法
+         * @param loginUser 只有用户名和密码
+         * @return user 包含用户全部数据, 没有查询到 返回null
+         */
+        public User login(User loginUser) {
+            try {
+                // 1. 编写sql
+                String sql = "select * from user where username = ? and password = ?;";
+                // 2. 调用query方法
+                User user = template.queryForObject(sql,
+                        new BeanPropertyRowMapper<User>(User.class), loginUser.getUsername(), loginUser.getPassword());
+                return user;
+            } catch (DataAccessException e) {
+                e.printStackTrace(); // 记录日志
+                return null;
+            }
+        }
+    }
+
+6. 编写cn.itcast.web.servlet.LoginServlet类
+
+7. login.html中from表单的action路劲的写法
+    * 虚拟目录+Servlet
