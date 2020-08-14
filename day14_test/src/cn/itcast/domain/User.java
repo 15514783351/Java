@@ -7,6 +7,9 @@ public class User {
     private int id;
     private String username;
     private String password;
+    private String gender;
+
+
 
     @Override
     public String toString() {
@@ -14,6 +17,7 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", gender='" + gender + '\'' +
                 '}';
     }
 
@@ -39,5 +43,12 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+    public String getGender() {
+        return gender;
     }
 }

@@ -121,6 +121,26 @@
     }
 
 6. 编写cn.itcast.web.servlet.LoginServlet类
+7. 编写FailServlet和SuccessServlet类
 
-7. login.html中from表单的action路劲的写法
+8. login.html中from表单的action路劲的写法
     * 虚拟目录+Servlet
+
+9. BeanUtils工具类，简化数据封装
+    1. 用于封装JavaBean的
+        1. 要求
+            1. 类必须被public修饰
+            2. 必须提供空参的构造器
+            3. 成员变量必须private修饰
+            4. 提供公共setter和getter方法
+        2. 功能：封装数据
+    2. 概念：
+        成员变量：
+        属性：setter和getter方法截取后的产物
+            例如：getUsername() --> Username --> username
+    3. 方法：
+        1. setProperty()  操作的是属性值 不是成员变量
+        2. getProperty() 操 作的是属性值 不是成员变量
+        3. populate(Object obj, Map map): 把map集合中的键值对信息，风爪那个到对应的javaBean对象中
+
+
