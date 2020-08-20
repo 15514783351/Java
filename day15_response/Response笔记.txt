@@ -157,4 +157,9 @@
             * content-disposition：attachment； filename=xxx
 
     * 步骤：
-        1. 定义页面：
+        1. 定义页面：编辑超链接href属性，执行Servlet，传递资源名称filename
+        2. 定义Servlet
+            1. 获取文件名称
+            2. 使用字节输入流加载文件进内存
+            3. 指定response的相应头： content-disposition:attachment;filename=xxx
+            3. 将数据写到response输出流
